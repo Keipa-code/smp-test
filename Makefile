@@ -23,7 +23,7 @@ docker-pull:
 docker-down-clear:
 	docker-compose down -v --remove-orphans
 
-api-init: api-permission api-composer-install api-wait-db api-migrate api-fixtures api-test-db-init
+api-init: api-permission api-composer-install api-wait-db api-migrate api-fixtures
 
 api-clear:
 	docker run --rm -v ${PWD}/api://var/www -w /var/www alpine sh -c 'rm -rf var/log/cli/* var/log/fpm-fcgi/* var/cache/* var/upload/* var/thumbs/*'
@@ -47,7 +47,7 @@ api-cs-fix:
 	docker-compose run --rm php-cli composer php-cs-fixer fix
 
 api-fixtures:
-	docker-compose run --rm php-cli php ./bin/console doctrine:fixtures:load --no-interaction --group=FakeDataGroup
+	docker-compose run --rm php-cli php ./bin/console doctrine:fixtures:load --no-interaction
 
 api-test-db-init: api-test-create-db api-test-migrate api-test-fixtures
 

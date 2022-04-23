@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Model;
+
 use Symfony\Component\Uid\Uuid;
 
 class PostItem

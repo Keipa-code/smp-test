@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Handler;
+
+use App\Mapper\PostMapper;
+use App\Model\PostItem;
 use App\Repository\PostRepository;
 
 class PostHandler
@@ -9,10 +13,15 @@ class PostHandler
     {
     }
 
-    public function getPostById(int $id)
+    public function getPostById(int $id): PostItem
     {
         $post = $this->postRepository->getById($id);
 
         return PostMapper::map($post, new PostItem());
+    }
+
+    public function getCommentsByPostId(int $id)
+    {
+        return $this->postRepository->getCommentsById($id);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Comment;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -23,20 +24,17 @@ class CommentRepository extends ServiceEntityRepository
 
     /**
      * @throws ORMException
-     * @throws OptimisticLockException
      */
-    public function add(Comment $entity, bool $flush = true): void
+    public function add(Comment $comment, string $userId, bool $flush = true): void
     {
-        $this->_em->persist($entity);
+        $user = $this->_em->getReference('App\Entity\User', $userId);
+        $comment->setUserId($user);
+        $this->_em->persist($comment);
         if ($flush) {
             $this->_em->flush();
         }
     }
 
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
     public function remove(Comment $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);

@@ -1,6 +1,9 @@
 <?php
 
+namespace App\Mapper;
+
 use App\Entity\Post;
+use App\Model\PostItem;
 
 class PostMapper
 {

@@ -1,9 +1,11 @@
 <?php
 
+namespace App\Handler;
+
 use App\Entity\User;
+use App\Mapper\UserMapper;
+use App\Model\UserItem;
 use App\Repository\UserRepository;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 
 class UserHandler
 {
@@ -11,9 +13,11 @@ class UserHandler
     {
     }
 
-    public function getUserById(int $id)
+    public function getUserById(string $id): UserItem
     {
+        $user = $this->userRepository->getById($id);
 
+        return UserMapper::map($user, new UserItem());
     }
 
     public function createUser(): UserItem

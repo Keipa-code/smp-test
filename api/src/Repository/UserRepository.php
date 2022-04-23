@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Exception\UserNotFoundException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -36,6 +37,16 @@ class UserRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    public function getById(string $id): User
+    {
+        $user = $this->find($id);
+        if (null === $user) {
+            throw new UserNotFoundException();
+        }
+
+        return $user;
     }
 
     // /**

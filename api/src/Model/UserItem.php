@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Model;
+
 use Symfony\Component\Uid\Uuid;
 
 class UserItem
@@ -14,7 +16,7 @@ class UserItem
 
     public function setId(Uuid $id): self
     {
-        $this->id = $id->toBinary();
+        $this->id = $id->toRfc4122();
 
         return $this;
     }

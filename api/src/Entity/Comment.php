@@ -14,7 +14,7 @@ class Comment
     private $id;
 
     #[ORM\Column(type: 'string', length: 500)]
-    private $еуtext;
+    private $text;
 
     #[ORM\ManyToOne(targetEntity: Post::class, inversedBy: 'comments')]
     private $post;
@@ -27,14 +27,14 @@ class Comment
         return $this->id;
     }
 
-    public function getеуtext(): ?string
+    public function getText(): ?string
     {
-        return $this->еуtext;
+        return $this->text;
     }
 
-    public function setеуtext(string $еуtext): self
+    public function setText(string $text): self
     {
-        $this->еуtext = $еуtext;
+        $this->text = $text;
 
         return $this;
     }
